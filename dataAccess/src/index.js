@@ -19,9 +19,10 @@ const maskingRules = {
  * @param {string} query - SQL query to execute
  * @param {Array<{columnName: string, maskType: string}>} maskingConfig - Configuration for which columns to mask
  * @param {Array} params - Query parameters
+ * @param {string} role - Role of the user executing the query (default: 'developer')
  * @returns {Promise<Array>} Masked query results
  */
-async function executeQueryWithMasking(query, maskingConfig = [], params = []) {
+async function executeQueryWithMasking(query, maskingConfig = [], params = [], role = 'developer') {
     const client = new Client({
         user: 'admin',
         host: 'localhost',
@@ -35,12 +36,12 @@ async function executeQueryWithMasking(query, maskingConfig = [], params = []) {
         // Execute the query
         const result = await client.query(query, params);
         
-        // If no masking config provided, return raw results
-        if (!maskingConfig.length) {
+        // If role is admin OR no masking config provided, return raw results
+        if (role === 'admin' || !maskingConfig.length) {
             return result.rows;
         }
 
-        // Apply masking to the results
+        // Apply masking to the results only for developer role
         const maskedRows = result.rows.map(row => {
             const maskedRow = { ...row };
             
