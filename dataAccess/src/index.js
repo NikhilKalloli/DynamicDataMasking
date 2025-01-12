@@ -66,7 +66,7 @@ async function executeQueryWithMasking(query, maskingConfig = [], params = [], r
 
 module.exports = {
     executeQueryWithMasking
-};
+}; 
 
 // Example usage:
 /*

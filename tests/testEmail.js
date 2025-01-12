@@ -10,7 +10,7 @@ describe('Masking email addresses', function () {
     //   unmaskedStartCharactersBeforeAt: 3,
     //   unmaskedEndCharactersAfterAt: 2
     //   maskAtTheRate: false
-    // };
+    // }; 
 
     let testData = [
       {
