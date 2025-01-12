@@ -4,6 +4,10 @@ const { executeQueryWithMasking } = require('../../dataAccess/src');
 const app = express();
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.send('Home Page - Masking API');
+});
+
 app.get('/users', async (req, res) => {
     try {
         const role = req.query.role || 'developer'; // Get role from query parameter, default to developer
